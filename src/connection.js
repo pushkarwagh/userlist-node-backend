@@ -1,17 +1,13 @@
-const { MongoClient } = require("mongodb");
+const mongoose = require("mongoose");
 const dot_env = require("dotenv");
 
 dot_env.config();
 
-const mongodb_url = process.env.MONGODB_CONNECTION_STRING;
-
-const connection = new MongoClient(mongodb_url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-connection
-  .connect()
+const connection = mongoose
+  .connect(process.env.MONGODB_CONNECTION_STRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     console.log("database connected successfully!!!! :)");
   })
@@ -20,3 +16,4 @@ connection
   });
 
 module.exports = connection;
+
